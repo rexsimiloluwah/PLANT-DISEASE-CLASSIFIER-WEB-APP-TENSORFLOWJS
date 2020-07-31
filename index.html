@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLANT DISEASE CLASSIFIER</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.3/gh-fork-ribbon.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+
+        *{
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        html,body{
+            width: 95%;
+            margin: 50px auto;
+            background: rgb(210, 214, 209);
+        }
+
+        @media (min-width: 768px){
+            html,body{
+                width: 80%;
+                margin: 50px auto;
+            }
+        }
+        h1 {
+            margin: 10px auto;
+            text-transform: uppercase;
+        }
+
+        h1 span{
+            color: limegreen;
+        }
+
+        hr{
+            margin: 10px 0px;
+        }
+
+        .github-fork-ribbon:before{
+            background: limegreen !important;
+        }
+
+
+        #uploadImage{
+            border: 1px dashed rgba(0,0,0,0.5);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        img{
+            width: 100%;
+            height: 300px;
+            
+        }
+
+        .row{
+            display: flex;
+            justify-content: space-around;
+            flex-direction: row;
+            flex-flow: wrap;
+            margin: 20px auto;
+            }
+            
+        .box{
+            width: 45%;
+        }
+
+        .box-result{
+            display: none;
+        }
+
+        .accuracy{
+            display: flex;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        
+        .progress {
+        width: 130px;
+        height: 130px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        }
+
+        .progress > .inner {
+        position: absolute;
+        color: limegreen; 
+        }
+
+        .progress > svg {
+        height: 100%;
+        display: block;
+        }
+
+        .init_status{
+            background: limegreen;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            transition: ease-in-out .5s;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px){
+            .box{
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a class="github-fork-ribbon" href="https://url.to-your.repo" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
+    <h1>Plant Disease Classifier <span class="fa fa-leaf"></span></h1>
+    <hr>
+
+
+    <input type="file" name="uploadImage" id="uploadImage" accept=".png, .jpg, .jpeg">
+    <div class="row">
+        <div class="box">
+            <img src="" alt="" id="image" width="224" height="224">
+        </div>
+
+        <div class="box box-result">
+            <div class="init_status"></div>
+            <div>
+                <h2>Your Plant is infected with :- <span class="pred_class"></span></h2>
+                
+            </div>
+            <div class="accuracy">
+                <div class="progress" id="progress">
+                    <div class="inner">
+                      
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tensorflow/2.0.1/tf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/progressbar.js/1.0.1/progressbar.min.js"></script>
+    <script>
+        
+        let model;
+        let class_indices;
+        let fileUpload = document.getElementById('uploadImage')
+        let img = document.getElementById('image')
+        let boxResult = document.querySelector('.box-result')
+
+        
+        let progressBar = 
+            new ProgressBar.Circle('#progress', {
+            color: 'limegreen',
+            strokeWidth: 10,
+            duration: 2000, // milliseconds
+            easing: 'easeInOut'
+        });
+
+        async function fetchData(){
+            let response = await fetch('./class_indices.json');
+            let data = await response.json();
+            data = JSON.stringify(data);
+            data = JSON.parse(data);
+            return data;
+        }
+
+         // here the data will be return.
+        
+
+        // Initialize/Load model
+        async function initialize() {
+            let status = document.querySelector('.init_status')
+            status.innerHTML = 'Loading Model .... <span class="fa fa-spinner fa-spin"></span>'
+            model = await tf.loadLayersModel('./tensorflowjs-model/model.json');
+            status.innerHTML = 'Model Loaded Successfully  <span class="fa fa-check"></span>'
+        }
+
+        async function predict() {
+            // Function for invoking prediction
+            let img = document.getElementById('image')
+            let offset = tf.scalar(255)
+            let tensorImg =   tf.browser.fromPixels(img).resizeNearestNeighbor([224,224]).toFloat().expandDims();
+            let tensorImg_scaled = tensorImg.div(offset)
+            prediction = await model.predict(tensorImg_scaled).data();
+           
+            fetchData().then((data)=> 
+                {
+                    predicted_class = tf.argMax(prediction)
+                    
+                    class_idx = Array.from(predicted_class.dataSync())[0]
+                    document.querySelector('.pred_class').innerHTML = data[class_idx]
+                    document.querySelector('.inner').innerHTML = `${parseFloat(prediction[class_idx]*100).toFixed(2)}% SURE`
+                    console.log(data[class_idx])
+                    console.log(prediction[class_idx])
+
+                    progressBar.animate(prediction[class_idx]-0.005); // percent
+  
+                }
+            );
+            
+        }
+
+        
+
+        fileUpload.addEventListener('change', function(e){
+
+            let file = this.files[0]
+            if (file){
+                boxResult.style.display = 'block'
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.addEventListener("load", function(){
+
+                    img.setAttribute('src', this.result);
+                });
+            }
+
+            else{
+            img.setAttribute("src", "");
+            }
+
+            initialize().then( () => { 
+                predict()
+            })
+        })
+
+
+    </script>
+</body>
+</html>
