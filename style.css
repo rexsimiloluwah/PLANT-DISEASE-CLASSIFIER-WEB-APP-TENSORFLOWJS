@@ -1,0 +1,106 @@
+
+        *{
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        html,body{
+            width: 95%;
+            margin: 50px auto;
+            background: rgb(210, 214, 209);
+        }
+
+        @media (min-width: 768px){
+            html,body{
+                width: 80%;
+                margin: 50px auto;
+            }
+        }
+        h1 {
+            margin: 10px auto;
+            text-transform: uppercase;
+        }
+
+        h1 span{
+            color: limegreen;
+        }
+
+        hr{
+            margin: 10px 0px;
+        }
+
+        .github-fork-ribbon:before{
+            background: limegreen !important;
+        }
+
+
+        #uploadImage{
+            border: 1px dashed rgba(0,0,0,0.5);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        img{
+            width: 100%;
+            height: 300px;
+            
+        }
+
+        .row{
+            display: flex;
+            justify-content: space-around;
+            flex-direction: row;
+            flex-flow: wrap;
+            margin: 20px auto;
+            }
+            
+        .box{
+            width: 45%;
+        }
+
+        .box-result{
+            display: none;
+        }
+
+        .accuracy{
+            display: flex;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        
+        .progress {
+        width: 130px;
+        height: 130px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        }
+
+        .progress > .inner {
+        position: absolute;
+        color: limegreen; 
+        }
+
+        .progress > svg {
+        height: 100%;
+        display: block;
+        }
+
+        .init_status{
+            background: limegreen;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            transition: ease-in-out .5s;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px){
+            .box{
+                width: 100%;
+            }
+        }
