@@ -12,3 +12,5 @@ Video Demonstration 😇 :-
 
 <img src="demo.gif" width="768" height="500" />
 
+<p>You can access the project online <a href="https://rexsimiloluwah.github.io/PLANT-DISEASE-CLASSIFIER-WEB-APP-TENSORFLOWJS/">HERE</a> </p>
+
