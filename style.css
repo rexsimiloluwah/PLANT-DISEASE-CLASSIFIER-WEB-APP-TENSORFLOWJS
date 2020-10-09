@@ -1,0 +1,276 @@
+<<<<<<< HEAD
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html,body{
+    width: 95%;
+    margin: 50px auto;
+    background: rgb(210, 214, 209);
+}
+
+@media (min-width: 768px){
+    html,body{
+        width: 80%;
+        margin: 50px auto;
+    }
+}
+h1 {
+    margin: 10px auto;
+    text-transform: uppercase;
+}
+
+h1 span{
+    color: limegreen;
+}
+
+hr{
+    margin: 10px 0px;
+}
+
+.github-fork-ribbon:before{
+    background: limegreen !important;
+}
+
+
+.upload-btn-wrapper{
+    position: relative;
+    overflow:hidden;
+    display:inline-block;
+    cursor:pointer;
+    font-family: 'Poppins',sans-serif;
+    width: 100%;
+    margin: 20px 0px;
+}
+.upload-file{
+    border:2px dashed #eee;
+    color:#9b9b9b;
+    background-color: white;
+    width:100%;
+    height:250px;
+    border-radius: 8px;
+    font-size:15px;
+    cursor: pointer;
+}
+.upload-btn-wrapper input[type=file]{
+    width:100%;
+    position: absolute;
+    left:0;
+    right:0;
+    top:0;
+    opacity: 0;
+    cursor: pointer;
+    min-height: 300px;
+}
+.success-1, .success-2{
+    display:none;
+    color: limegreen;
+}
+.success-1 i, .success-2 i{
+    font-size: 18px !important;
+    margin-left:6px;
+    margin-top:4px;
+    color: limegreen;
+    border: 1px solid limegreen;
+    padding: 5px;
+    border-radius: 50%;
+}
+.font-50{
+    font-size:50px;
+}
+.d-block{
+    display:block;
+}
+.btn .upload-file{
+    font-size: 30px;
+}
+.upload-btn{
+    display:block;
+    font-size: 18px;
+    color: limegreen;
+}
+
+.upload-btn i{
+    font-size: 100px;
+}
+
+img{
+    width: 100%;
+    height: 300px;
+    display: none;
+}
+
+.row{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    flex-flow: wrap;
+    margin: 20px auto;
+    }
+    
+.box{
+    width: 45%;
+}
+
+.box-result{
+    display: none;
+}
+
+.accuracy{
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+
+.progress {
+width: 130px;
+height: 130px;
+position: relative;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.progress > .inner {
+position: absolute;
+color: limegreen; 
+}
+
+.progress > svg {
+height: 100%;
+display: block;
+}
+
+.init_status{
+    background: limegreen;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    transition: ease-in-out .5s;
+    text-align: center;
+    margin: 10px 0px;
+
+}
+
+@media (max-width: 768px){
+    .box{
+        width: 100%;
+    }
+}
+
+.tutorial{
+    text-align: center;
+    color: #222222;
+}
+=======
+
+        *{
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        html,body{
+            width: 95%;
+            margin: 50px auto;
+            background: rgb(210, 214, 209);
+        }
+
+        @media (min-width: 768px){
+            html,body{
+                width: 80%;
+                margin: 50px auto;
+            }
+        }
+        h1 {
+            margin: 10px auto;
+            text-transform: uppercase;
+        }
+
+        h1 span{
+            color: limegreen;
+        }
+
+        hr{
+            margin: 10px 0px;
+        }
+
+        .github-fork-ribbon:before{
+            background: limegreen !important;
+        }
+
+
+        #uploadImage{
+            border: 1px dashed rgba(0,0,0,0.5);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        img{
+            width: 100%;
+            height: 300px;
+            
+        }
+
+        .row{
+            display: flex;
+            justify-content: space-around;
+            flex-direction: row;
+            flex-flow: wrap;
+            margin: 20px auto;
+            }
+            
+        .box{
+            width: 45%;
+        }
+
+        .box-result{
+            display: none;
+        }
+
+        .accuracy{
+            display: flex;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        
+        .progress {
+        width: 130px;
+        height: 130px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        }
+
+        .progress > .inner {
+        position: absolute;
+        color: limegreen; 
+        }
+
+        .progress > svg {
+        height: 100%;
+        display: block;
+        }
+
+        .init_status{
+            background: limegreen;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            transition: ease-in-out .5s;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px){
+            .box{
+                width: 100%;
+            }
+        }
+>>>>>>> 14866427036373a12ead5cca38b1546d951d8369
