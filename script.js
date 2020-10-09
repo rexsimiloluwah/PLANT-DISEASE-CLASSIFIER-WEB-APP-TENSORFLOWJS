@@ -3,6 +3,8 @@ let class_indices;
 let fileUpload = document.getElementById('uploadImage')
 let img = document.getElementById('image')
 let boxResult = document.querySelector('.box-result')
+let confidence = document.querySelector('.confidence')
+let pconf = document.querySelector('.box-result p')
 
         
         let progressBar = 
@@ -52,6 +54,10 @@ let boxResult = document.querySelector('.box-result')
                     console.log(prediction)
 
                     progressBar.animate(prediction[class_idx]-0.005); // percent
+
+                    pconf.style.display = 'block'
+
+                    confidence.innerHTML = Math.round(prediction[class_idx]*100)
   
                 }
             );
